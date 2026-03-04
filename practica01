@@ -1,0 +1,149 @@
+ejercicio1
+import time
+import random
+class Cronometro:
+    def __init__(self):
+        self.__inicia = time.time() * 1000
+        self.__finaliza = self.__inicia
+    def get_inicia(self):
+        return self.__inicia
+    def get_finaliza(self):
+        return self.__finaliza
+    def inicia(self):
+        self.__inicia = time.time() * 1000
+    def detener(self):
+        self.__finaliza = time.time() * 1000
+    def lapsoDeTiempo(self):
+        return int(self.__finaliza - self.__inicia)
+print("TEST DE ORDENACIÓN")
+cantidad = 10000 
+print(f"Generando {cantidad} números...")
+numeros = [random.randint(1, 1000000) for _ in range(cantidad)]
+reloj = Cronometro()
+reloj.inicia() 
+print("Ordenando por selección... espera unos segundos...")
+n = len(numeros)
+for i in range(n):
+    min_idx = i
+    for j in range(i + 1, n):
+        if numeros[j] < numeros[min_idx]:
+            min_idx = j
+    numeros[i], numeros[min_idx] = numeros[min_idx], numeros[i]
+reloj.detener()
+print("Punto de inicio:", reloj.get_inicia(), "ms")
+print("Punto de fin:   ", reloj.get_finaliza() ,"ms") 
+print("TIEMPO TOTAL:   ", reloj.lapsoDeTiempo() ,"milisegundos")
+ejercicio 2
+class ecuacionlineal:
+    def __init__(self,a,b,c,d,e,f):
+        self.__a=a
+        self.__b=b
+        self.__c=c
+        self.__d=d
+        self.__e=e
+        self.__f=f
+
+    def solucion(self):
+        denominador=(self.__a*self.__d)-(self.__b*self.__c)
+        if denominador !=0:
+            return True
+        else:
+            return False
+    def getX(self):
+        num=(self.__e*self.__d)-(self.__b*self.__f)
+        dem=(self.__a*self.__d)-(self.__b*self.__c)
+        return num/dem
+    def getY(self):
+        num=(self.__a*self.__f)-(self.__e*self.__c)
+        dem=(self.__a*self.__d)-(self.__b*self.__c)
+        return num/dem
+while True: 
+    A=float(input("ingrese coeficiente A: "))
+    B=float(input("ingrese coeficiente B: "))
+    C=float(input("ingrese coeficiente C: "))
+    D=float(input("ingrese coeficiente D: "))
+    E=float(input("ingrese coeficiente E: "))
+    F=float(input("ingrese coeficiente F: "))
+    
+    ecuacion=ecuacionlineal(A,B,C,D,E,F)
+    if ecuacion.solucion(): 
+        print("X= ",ecuacion.getX(),"Y= ",ecuacion.getY())
+    else:
+        print("LA ECUACION NO TIENE SOLUCION ERROR !!!!!")
+ejercicio 3
+package ejerciciosdeprogramacion;
+import java.util.Scanner;
+public class ecuacioncuadratica {
+	private double a ;
+	private double b ;
+	private double c ;
+	public ecuacioncuadratica (double a,double b, double c) {
+		this.a=a;
+		this.b=b;
+		this.c=c;
+	}
+	public double getdiscriminante() {
+		double res=(Math.pow(this.b, 2))-4*this.a*this.c;
+		return res;}
+	public double getRAIZ1() {
+		double num;
+		num=-this.b+Math.sqrt((Math.pow(this.b, 2))-4*this.a*this.c);
+		return num/2*this.a;
+		
+	}
+	public double getRAIZ2() {
+		double num;
+		num=-this.b-Math.sqrt((Math.pow(this.b, 2))-4*this.a*this.c);
+		return num/2*this.a;
+		
+	}
+	public static void main(String[] args) {
+		Scanner en =new Scanner(System.in);
+		System.out.println("ingrese a,b,c: ");
+		double a =en.nextDouble();
+		double b =en.nextDouble();
+		double c =en.nextDouble();
+		ecuacioncuadratica eq = new ecuacioncuadratica(a, b, c);
+        double disc = eq.getdiscriminante();
+        if (disc > 0) {
+            System.out.println("La ecuación tiene dos raíces " + eq.getRAIZ1() + " y " + eq.getRAIZ2());
+        } 
+        else if (disc == 0) {
+            System.out.println("La ecuación tiene una raíz " + eq.getRAIZ1());
+        } 
+        else {
+            System.out.println("La ecuación no tiene raíces reales");
+        }
+
+	}
+
+}
+ejercicio 4
+import math
+class estadistica:
+    def __init__(self,lista):
+        self.__datos=lista
+
+    def promedio(self):
+        n=len(self.__datos)
+        sum=0
+        for i in range (n):
+            sum=sum+self.__datos[i]
+        return sum/n
+    def desviacion(self):
+        prom=self.promedio()
+        n=len(self.__datos)
+        num=0
+        for i in range (n):
+            num=num+(self.__datos[i]-prom)**2
+        return math.sqrt(num/(n-1))
+    
+while True:
+    print("ingrese 10 numeros: ")
+    lista=[]
+    for i in range (10):
+        numero = float(input(f"Número {i+1}: "))
+        lista.append(numero)
+    calcular=estadistica(lista)
+    print("el promedio es: ", calcular.promedio())
+    print("la desviacion es: ", calcular.desviacion())
